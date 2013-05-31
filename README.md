@@ -121,8 +121,9 @@ Event rules allow you to ensure an event callback will only be invoked under cer
 
 ```php
 // register an event listener with a rule to match a regex
-$event->listen('onDispatch', 'SomeClass::someMethod')
-      ->withRule('route', '/some-route/([^\\/]+?)');
+$event->listen('onDispatch', function () {
+    // ...
+})->withRule('route', '/some-route/([^\\/]+?)');
 
 // resolve the route, for this example we have a manually built array
 $rules = [
