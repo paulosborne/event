@@ -103,9 +103,10 @@ class EventCollection
      *
      * @param  string $name
      * @param  object $object
+     * @param  array  $args
      * @return void
      */
-    protected function triggerObjectEvent($name, $object)
+    protected function triggerObjectEvent($name, $object, $args = [])
     {
         if (! is_object($object)) {
             throw \InvalidArgumentException(
