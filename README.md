@@ -9,7 +9,7 @@ Orno\Event is available on Packagist so the easiest way to install it into your 
 Simply add orno/event to your `composer.json` file like so:
 
     "require": {
-        "orno/di": "1.*"
+        "orno/events": "dev-master"
     }
 
 ## Usage
