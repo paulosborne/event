@@ -66,8 +66,8 @@ class Event
     {
         $object = $this->getContainer()->resolve($alias);
 
-        if (! is_null($method)) {
-            call_user_func_array([$object, $method], $args);
+        if (! is_null($this->method)) {
+            call_user_func_array([$object, $this->method], $args);
         }
     }
 
