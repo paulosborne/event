@@ -57,6 +57,21 @@ class Event
     }
 
     /**
+     * Invoke the event object
+     *
+     * @param  array $args
+     * @return void
+     */
+    public function __invoke(array $args)
+    {
+        $object = $this->getContainer()->resolve($alias);
+
+        if (! is_null($method)) {
+            call_user_func_array([$object, $method], $args);
+        }
+    }
+
+    /**
      * Adds a named pattern that must be matched for the event to be invoked.
      * Helpful if you want to attach an event to a route or module.
      *

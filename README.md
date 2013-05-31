@@ -9,7 +9,7 @@ Orno\Event is available on Packagist so the easiest way to install it into your 
 Simply add orno/event to your `composer.json` file like so:
 
     "require": {
-        "orno/events": "dev-master"
+        "orno/event": "dev-master"
     }
 
 ## Usage
@@ -74,4 +74,43 @@ $event->listen('someEvent', 'EventCallbacks::sayHello', 0);
 $event->listen('someEvent', 'EventCallbacks::sayPhil', 1);
 
 $event->trigger('someEvent');
+```
+
+### Object Callbacks
+
+There may be a situation where you would like to trigger callbacks from within a class/object.
+
+For example, in an MVC application you may wish to trigger a callback every time a controller is resolved. This can be done by creating a method that matches the event name.
+
+```php
+<?php
+
+class SomeController
+{
+    public function onDispatch()
+    {
+        // define some logic to be run on the 'onDispatch' event
+    }
+
+    public function someAction()
+    {
+        // a standard controller action
+    }
+}
+```
+
+You may also wish to run a callback on the same event for every request.
+
+```php
+$event->listen('onDisptach', function () {
+    // some logging functionality
+});
+```
+
+Now, once we resolve the controller we can trigger this event before dispatching the controller action, by passing the controller object in to the `trigger()` method as it's second argument, the `onDispatch()` method will be invoked as it matches the event name.
+
+```php
+$controller = SomeController;
+
+$event->trigger('onBootstrap', $controller);
 ```

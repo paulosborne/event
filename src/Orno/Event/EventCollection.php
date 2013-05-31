@@ -103,9 +103,9 @@ class EventCollection
      *
      * @param  string $name
      * @param  object $object
-     * @return string
+     * @return void
      */
-    public function triggerObjectEvent($name, $object)
+    protected function triggerObjectEvent($name, $object)
     {
         if (! is_object($object)) {
             throw \InvalidArgumentException(
@@ -113,12 +113,47 @@ class EventCollection
             );
         }
 
-        ob_start();
-
         if ((new \ReflectionClass($object))->hasMethod($name)) {
             $method = new \ReflectionMethod($object, $name);
             $method->setAccessible(true);
             $method->invokeArgs($object, $args);
+        }
+    }
+
+    /**
+     * Trigger all callbacks listening for an event name, then proxies to
+     * triggerObjectEvent()
+     *
+     * @param  string $name
+     * @param  object $object
+     * @param  array  $args
+     * @param  array  $rules
+     * @return string
+     */
+    public function trigger($name, $object = null, $args = [], $rules = [])
+    {
+        ob_start();
+
+        // loop through listeners
+        foreach ($this->getListeners($name) as $event) {
+            $matched = [];
+
+            // check all rules match
+            foreach ($rules as $rule => $value) {
+                $matched[] = $event->isRuleMatch($rule, $value);
+            }
+
+            // if any rule matches failed continue to next listener
+            if (in_array(false, $matched)) {
+                continue;
+            }
+
+            $event($args);
+        }
+
+        // do we have a class/object to check for callbacks?
+        if (! is_null($object)) {
+            $this->triggerObjectEvent($name, $object);
         }
 
         $output = ob_get_contents();
