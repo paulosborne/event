@@ -78,7 +78,7 @@ $event->trigger('someEvent');
 
 ### Object Callbacks
 
-There may be a situation where you would like to trigger callbacks from within a class/object.
+There may be a situation where you would like to trigger callbacks from within a class/object without registering a listener.
 
 For example, in an MVC application you may wish to trigger a callback every time a controller is resolved. This can be done by creating a method that matches the event name.
 
