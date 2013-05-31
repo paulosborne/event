@@ -2,7 +2,19 @@
 
 A simple and intuitive Event Manager that allows you to trigger events based on regex rules, providing fine grained control for when your event callbacks are invoked.
 
-## Simple Usage
+## Installation
+
+Orno\Event is available on Packagist so the easiest way to install it into your project is via Composer. You han get more information about composer [here](http://getcomposer.org/doc/00-intro.md).
+
+Simply add orno/event to your `composer.json` file like so:
+
+    "require": {
+        "orno/di": "1.*"
+    }
+
+## Usage
+
+### Simple Callbacks
 
 ```php
 <?php
@@ -27,4 +39,39 @@ Event listeners are called in priority order, the `listen()` method accepts an i
 
 ```
 Hello Phil!
+```
+
+### Grouping Callbacks
+
+You may wish to group related callbacks within a class/object.
+
+```php
+<?php
+
+class EventCallbacks
+{
+    public function sayHello()
+    {
+        echo 'Hello ';
+    }
+
+    public function sayPhil()
+    {
+        echo 'Phil!';
+    }
+}
+```
+
+The above methods can quite easily be attached to an event listener.
+
+```php
+<?php
+
+$event = new Orno\Event\EventCollection;
+
+// we can attach a Class::method callback to an event listener like so
+$event->listen('someEvent', 'EventCallbacks::sayHello', 0);
+$event->listen('someEvent', 'EventCallbacks::sayPhil', 1);
+
+$event->trigger('someEvent');
 ```
