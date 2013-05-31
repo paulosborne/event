@@ -114,3 +114,21 @@ $controller = new SomeController;
 
 $event->trigger('onBootstrap', $controller);
 ```
+
+### Event Rules
+
+Event rules allow you to ensure an event callback will only be invoked under certain conditions. For example, in an MVC application, we may only want to trigger a callback if a particular route is hit.
+
+```php
+// register an event listener with a rule to match a regex
+$event->listen('onDispatch', 'SomeClass::someMethod')
+      ->withRule('route', '/some-route/([^\\/]+?)');
+
+// resolve the route, for this example we have a manually built array
+$rules = [
+    'route' => '/some-route/uri-segment'
+];
+
+// we pass in the rule values to be matched as the third parameter
+$event->trigger('onDispatch', null, $rules);
+```
