@@ -112,7 +112,7 @@ Now, once we resolve the controller we can trigger this event before dispatching
 ```php
 $controller = new SomeController;
 
-$event->trigger('onBootstrap', $controller);
+$event->trigger('onDispatch', $controller);
 ```
 
 ### Event Rules
