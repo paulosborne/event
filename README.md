@@ -1,6 +1,6 @@
 # Orno\Event
 
-A simple and intuitive Event Manager that allows you to trigger events based on regex rules.
+A simple and intuitive Event Manager that allows you to trigger events based on regex rules, providing fine grained control for when your event callbacks are invoked.
 
 ## Simple Usage
 
@@ -23,7 +23,7 @@ $event->listen('sayHello', function () {
 $event->trigger('sayHello');
 ```
 
-Event listeners are called in priority order, `listen` accepts an integer as it's third parameter, the lower the number, the earlier the callback will be invoked. So the above code will output the following based on the listener priorities.
+Event listeners are called in priority order, the `listen()` method accepts an integer as it's third parameter, the lower the number, the earlier the callback will be invoked. So the above code will output the following based on the listener priorities.
 
 ```
 Hello Phil!
