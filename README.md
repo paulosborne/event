@@ -110,7 +110,7 @@ $event->listen('onDisptach', function () {
 Now, once we resolve the controller we can trigger this event before dispatching the controller action, by passing the controller object in to the `trigger()` method as it's second argument, the `onDispatch()` method will be invoked as it matches the event name.
 
 ```php
-$controller = SomeController;
+$controller = new SomeController;
 
 $event->trigger('onBootstrap', $controller);
 ```
