@@ -126,11 +126,11 @@ class EventCollection
      *
      * @param  string $name
      * @param  object $object
-     * @param  array  $args
      * @param  array  $rules
+     * @param  array  $args
      * @return string
      */
-    public function trigger($name, $object = null, $args = [], $rules = [])
+    public function trigger($name, $object = null, $rules = [], $args = [])
     {
         ob_start();
 
