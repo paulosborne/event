@@ -1,0 +1,22 @@
+{
+  "name": "orno/event",
+  "description": "An event manager to allow functionality hooks within an application.",
+  "keywords": ["orno", "event"],
+  "license": "WTFPL",
+  "require": {
+    "php": ">=5.4"
+  },
+  "authors": [
+    {
+      "name": "Phil Bennett",
+      "email":
+      "philipobenito@gmail.com"
+    }
+  ],
+  "autoload": {
+      "psr-0": {
+        "Orno\\Event": "src/"
+      }
+  },
+  "minimum-stability": "dev"
+}
